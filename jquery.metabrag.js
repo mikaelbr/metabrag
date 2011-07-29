@@ -1,9 +1,8 @@
 /*!
  * jQuery JavaScript Library Plugin: metabrag
  *
- * Copyright 2011, John Resig
+ * Copyright 2011, Mikael Brevik
  * Licensed under the GPL Version 2 licens.
- * http://jquery.org/license
  *
  *
  * Date: Thu Jul 29 21:48:21 2011 +0100
@@ -38,7 +37,6 @@
                     $this._getCoderwallBadges(username);
                 }
         
-        
             });
             
         },
@@ -46,19 +44,11 @@
         refresh: function () {
             
         },
-        
-        _getGithubUserInfo: function (username) {
-            $.getJSON(this._githubApiURL + username, this._insertGuthubUserInfo);
-        },
-        
+                
         _insertGuthubUserInfo: function (jsonObj) {
             console.log("------ Github UserInfo -------");
             console.log(jsonObj);            
             console.log("----  // Github UserInfo -----");
-        },
-        
-        _getGithubRepoInfo: function (username) {
-            $.getJSON(this._githubApiURL + username + "/repos", this._insertGuthubUserInfo);
         },
         
         _insertGuthubRepoInfo: function (jsonObj) {
@@ -67,9 +57,6 @@
             console.log("----  // Github Repos Info -----");
         },
         
-        _getCoderwallBadges: function (username) {
-            $.getJSON(this._coderwallApiURL + username + ".json", this._insertGuthubUserInfo);
-        },
         
         _insertCoderwallBadges: function (jsonObj) {
             console.log("------ Coderwall UserInfo -------");
@@ -77,9 +64,17 @@
             console.log("----  // Coderwall UserInfo -----");
         },
         
-        
         _githubApiURL: "https://api.github.com/users/",
-        _coderwallApiURL: "http://coderwall.com/"
+        _coderwallApiURL: "http://coderwall.com/",
+        _getGithubUserInfo: function (username) {
+            $.getJSON(this._githubApiURL + username + "?callback=?", this._insertGuthubUserInfo);
+        },
+        _getGithubRepoInfo: function (username) {
+            $.getJSON(this._githubApiURL + username + "/repos?callback=?", this._insertGuthubUserInfo);
+        },
+        _getCoderwallBadges: function (username) {
+            $.getJSON(this._coderwallApiURL + username + ".json?callback=?", this._insertGuthubUserInfo);
+        }
     };
 
 
@@ -107,7 +102,8 @@
         username: '',
         showGithubUserInfo: true,
         showGithubRepoInfo: true,
-        showCoderwallBadges: true
+        showCoderwallBadges: true,
+        showForks: true
     };
   
 })( jQuery );
