@@ -3,22 +3,24 @@
     <head>
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+        <link rel="stylesheet" type="text/css" href="jquery.metabrag.css" />
+        <link rel="stylesheet" type="text/css" href="metabrag.demo.css" />
         <script type="text/javascript" src="jquery.min.js"></script>
         <script type="text/javascript" src="jquery.metabrag.js"></script>
 
         <script type="text/javascript">
             $(function() {
-                $(".testing").metabrag();
-                $(".testing").metabrag("refresh");
+                $.fn.metabrag.defaults.loadingMessage = "Loading!";
+                $(".metabrag").metabrag({
+                    showForks: true
+                });
             });
         </script>
     </head>
     <body>
-        <div></div>
-
-        <div class="testing" data-metabrag-username="mikaelbr"></div>
-        <strong class="test2ing" data-metabrag-username="schacon"></strong>
-
+        <div class="page-wrapper">
+            <!-- The metabrag plugin will automaticly fetch the username -->
+            <div class="metabrag" data-metabrag-username="mikaelbr"></div>
+        </div>
     </body>
 </html>
