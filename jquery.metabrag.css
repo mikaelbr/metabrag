@@ -1,0 +1,126 @@
+/* 
+    Document   : jquery.metabrag
+    Created on : Jul 30, 2011, 8:30:59 PM
+    Author     : Mikael Brevik
+    Description: Structural settings for metabrag.
+        
+*/
+
+/** Generic styling **/
+
+.ui-metabrag-content {
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    width: 100%;
+}
+
+.ui-metabrag-content:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.ui-metabrag-content {
+    display: inline-block;
+}
+
+html[xmlns] .ui-metabrag-content {
+    display: block;
+}
+
+* html .ui-metabrag-content {
+    height: 1%;
+}
+
+.ui-metabrag-github-userbox,
+.ui-metabrag-github-repobox,
+.ui-metabrag-coderwall-badges {
+    position: relative;
+    clear: both;
+    min-height: 80px;
+}
+
+.ui-metabrag-loading {
+    position: absolute;
+    width: 70px;
+    height: 30px;
+    top: 20%;
+    left: 45%;
+    font-size: 0.8em;
+    font-style: italic;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding-top: 15px;
+    border-radius: 10px;
+    text-shadow: #ccc 1px 1px 3px;
+}
+
+/** // Generic styling **/
+
+/** UserBox Styling **/
+
+.ui-metabrag-github-userbox .ui-metabrag-avatar img { display: block; }
+.ui-metabrag-github-userbox .ui-metabrag-avatar { float: left; margin-right: 10px; }
+.ui-metabrag-github-userbox h2 { margin: 0px; padding: 0px; }
+.ui-metabrag-github-userbox h2 span { margin-left: 10px; font-style: italic; font-size: 0.9em; }
+.ui-metabrag-github-userbox {
+    padding: 10px;
+}
+.ui-metabrag-github-userbox .ui-metabrag-infolist {
+    list-style-type: none;
+    margin: 0px;
+}
+
+.ui-metabrag-github-userbox .ui-metabrag-infolist li {
+    display: inline-block;
+    margin-right: 10px;
+    font-style: italic;
+}
+
+/** // End UserBox Styling **/
+
+
+/** RepoBox Styling **/
+.ui-metabrag-github-repobox ul {
+    list-style-type: none;
+    margin: 0px; padding: 0px;
+}
+
+.ui-metabrag-github-repobox li {
+    clear: both;
+}
+.ui-metabrag-github-repobox li h3 {
+    width: 80%;
+    float: left;
+}
+
+.ui-metabrag-github-repobox li ul {
+    width: 20%;
+    float: right;
+    text-align: right;
+    font-size: 0.9em;
+}
+.ui-metabrag-github-repobox li p {
+    clear: both;
+}
+
+/** // End RepoBox Styling **/
+
+
+/** Badges Styling **/
+
+.ui-metabrag-coderwall-badges {
+}
+
+.ui-metabrag-coderwall-badges ul {
+    list-style-type: none;
+}
+.ui-metabrag-coderwall-badges ul li {
+    display: block;
+    float: left;
+}
+
+/** // End Badges Styling **/

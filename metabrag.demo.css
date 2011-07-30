@@ -1,0 +1,152 @@
+/* 
+    Document   : metabrag.demo
+    Created on : Jul 30, 2011, 10:10:09 PM
+    Author     : mikaelbrevik
+    Description:
+        Demo styling of the metabrag jquery plugin. 
+*/
+* {padding: 0px; margin: 0px;}
+body {
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    font-size: 14px;
+    background: #40494f;
+    padding: 40px;
+    height: 100%;
+}
+
+.page-wrapper {
+    width: 600px;
+    margin: 0px auto;
+}
+
+.ui-metabrag-github-userbox .ui-metabrag-avatar { 
+
+}
+
+.ui-metabrag-github-userbox .ui-metabrag-avatar img { 
+    border: 1px solid #1871a5;
+}
+
+.ui-metabrag-github-userbox {
+    background: -webkit-gradient(linear, left top, left bottom, from(#1b8fd1), to(#006baa));
+    background: -moz-linear-gradient(top,  #1b8fd1,  #006baa);
+    border: 1px solid #40a0d8;
+    box-shadow: 0px 0px 3px #000;
+    -webkit-box-shadow: 0px 0px 3px #000;
+    -moz-box-shadow: 0px 0px 3px #000;
+    z-index: 999;
+}
+.ui-metabrag-github-userbox h2 {
+    display: block;
+}
+.ui-metabrag-github-userbox h2 a:link, 
+.ui-metabrag-github-userbox h2 a:visited { 
+    font-family: "Georgia", Helvetica, sans-serif; 
+    font-size: 1.5em;
+    text-decoration: none;
+    color: #eee;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.ui-metabrag-github-userbox ul {
+    color: #eee;
+    font-size: 0.8em;
+    text-shadow: 1px 1px 0px #000;
+}
+.ui-metabrag-github-userbox .ui-metabrag-extended-infolist {
+    clear:left;
+    font-size: 1em;
+}
+.ui-metabrag-github-userbox .ui-metabrag-extended-infolist li {
+    list-style-type: none;
+}
+
+.ui-metabrag-github-userbox .ui-metabrag-extended-infolist li span {
+    font-weight: bold;
+}
+
+.ui-metabrag-github-userbox h2 a:hover, 
+.ui-metabrag-github-userbox h2 a:active { 
+    color: #ddd;
+}
+.ui-metabrag-github-userbox h2 span { 
+    font-size: 0.7em;
+    font-weight: 100;
+}
+
+.ui-metabrag-github-repobox {
+    width: 95%;
+    margin: 0px auto;
+    margin-top: -20px;
+    background: #fff;
+    padding: 10px;
+    padding-top: 35px;
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.ui-metabrag-github-repobox > ul > li {
+    border-radius: 3px;
+    padding: 5px;
+    margin-bottom: 10px;
+
+    background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#ddd));
+    background: -moz-linear-gradient(top,  #ccc,  #ddd);
+}
+
+.ui-metabrag-github-repobox > ul > li:hover {
+    background: #bbb;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#ccc));
+    background: -moz-linear-gradient(top,  #ddd,  #ccc);
+}
+
+.ui-metabrag-github-repobox ul li h3 {
+    font-size: 1.7em;
+    margin: 0px;
+    padding: 0px;
+}
+.ui-metabrag-github-repobox ul li h3 a:link,
+.ui-metabrag-github-repobox ul li h3 a:visited {
+    color: #006baa;
+    text-shadow: 1px 1px 1px #fff;
+    text-decoration: none;
+}
+
+
+.ui-metabrag-github-repobox ul li h3 a:hover,
+.ui-metabrag-github-repobox ul li h3 a:active {
+    color: #1b8fd1;
+    text-shadow: 1px 1px 1px #ddd;
+}
+
+.ui-metabrag-github-repobox ul li p {
+    margin-top: 10px;
+    color: #000;
+    text-shadow: 1px 1px 1px #fff;
+}
+
+.ui-metabrag-github-repobox li li {
+    color: #000;
+    text-shadow: 1px 1px 1px #fff;
+    font-size: 0.9em;
+}
+
+.ui-metabrag-coderwall-badges {
+    margin: 10px;
+    margin-top: 30px;
+}
+
+.ui-metabrag-coderwall-badges ul li img {
+    background: -webkit-gradient(linear, left top, left bottom, from(#1b8fd1), to(#006baa));
+    background: -moz-linear-gradient(top,  #1b8fd1,  #006baa);
+    border: 1px solid #40a0d8;
+    box-shadow: 0px 0px 3px #000;
+    -webkit-box-shadow: 0px 0px 3px #000;
+    -moz-box-shadow: 0px 0px 3px #000;
+    border-radius: 100px;
+}
+
+.ui-metabrag-coderwall-badges ul li img:hover {
+    background: -webkit-gradient(linear, left top, left bottom, from(#006baa), to(#1b8fd1));
+    background: -moz-linear-gradient(top,  #1b8fd1,  #006baa);
+}
