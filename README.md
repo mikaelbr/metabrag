@@ -127,6 +127,16 @@ Here are the settings that can be altered to customize your geek creds
 What's important to remember is that the data attributes are of a higher priority than the
 username property. If you have set property username and the data attribute. 
 
+## Further plans
+
+Here are some of the plans made for this plugin
+
+* Expand default settings to contain language strings
+* Better error handeling
+* Expand to support more code banks (Codeplex etc.)
+* Make minified version
+* More elegant DOM manipulation.
+* More features?
 
 ## Contribute
 
