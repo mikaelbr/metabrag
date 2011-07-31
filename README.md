@@ -74,9 +74,8 @@ $(".element-name").metabrag();
 ```
 
 ### Multiple boxes
-There's some bugs using this right now. The bug is pretty obvious, and is due to me not
-originally planning to support multiple users. How ever, when fixed, you can have multiple
-users by having more wrappers with the same class and diffrent attribute values
+You can easily implement multiple boxes with different usernames. Just add more wrappers
+with different attribute values, and initiate metabrag as usual.
 
 #### Javascript
 ```javascript
