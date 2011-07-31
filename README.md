@@ -110,6 +110,7 @@ Here are the settings that can be altered to customize your geek creds
 ```javascript
 {
     username: '', // Global username - if only one username is supported.
+    coderwallUsername: '', // Global coderwall username
     showGithubUserInfo: true, // Shows/hides the github user info box
     showGithubRepoInfo: true, // Shows/hides the github repo info box
     showCoderwallBadges: true, // Shows/hides coderwall badges
