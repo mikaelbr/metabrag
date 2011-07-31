@@ -33,13 +33,20 @@
                 // Check for overwritten data attr.
                 if(typeof $(this).attr("data-metabrag-username") != "undefined") {
                     username = $(this).attr("data-metabrag-username");
+                } else {
+                    $(this).attr("data-metabrag-username", username);
                 } 
                 
                 // Try for a coderwall spesific username
                 var coderwallUsername = username;
+                if($this._settings.coderwallUsername != "") {
+                    coderwallUsername = $this._settings.coderwallUsername;
+                }
                 // Check for overwritten data attr.
                 if(typeof $(this).attr("data-metabrag-coderwall-username") != "undefined") {
                     coderwallUsername = $(this).attr("data-metabrag-coderwall-username");
+                } else {
+                    $(this).attr("data-metabrag-coderwall-username", coderwallUsername);
                 }
                 
                                     
@@ -50,7 +57,7 @@
                 if(!!$this._settings.showGithubUserInfo) {
                     var $userWrapper = $("<div />")
                     .addClass($this._settings.userInfoBoxClass)
-                    .appendTo($this._$element);
+                    .appendTo(this);
                     
                     $("<p />").addClass("ui-metabrag-loading").text(methods._settings.loadingMessage).appendTo($userWrapper);
                         
@@ -60,7 +67,7 @@
                 if(!!$this._settings.showGithubRepoInfo) {
                     var $repoWrapper = $("<div />")
                     .addClass($this._settings.repoInfoBoxClass)
-                    .appendTo($this._$element);
+                    .appendTo(this);
                     
                     $("<p />").addClass("ui-metabrag-loading").text(methods._settings.loadingMessage).appendTo($repoWrapper);
                         
@@ -70,7 +77,7 @@
                 if(!!$this._settings.showCoderwallBadges) {
                     var $badgeWrapper = $("<div />")
                     .addClass($this._settings.coderwallBadgesClass)
-                    .appendTo($this._$element);
+                    .appendTo(this);
                     
                     $("<p />").addClass("ui-metabrag-loading").text(methods._settings.loadingMessage).appendTo($badgeWrapper);
                         
@@ -91,8 +98,8 @@
             return this;
         },
                 
-        _insertGuthubUserInfo: function (jsonObj) {
-            var $child = methods._$element.find("."+methods._settings.userInfoBoxClass);
+        _insertGuthubUserInfo: function (jsonObj, username) {
+            var $child = $(methods._$element + "[data-metabrag-username='"+username+"']").find("."+methods._settings.userInfoBoxClass);
             
             if(jsonObj.meta.status == 404) {
                 // We have an error
@@ -164,16 +171,15 @@
             return element;
         },
         
-        _insertGuthubRepoInfo: function (jsonObj) {
-            var $child = methods._$element.find("."+methods._settings.repoInfoBoxClass);
-
+        _insertGuthubRepoInfo: function (jsonObj, username) {
+            var $child = $(methods._$element + "[data-metabrag-username='"+username+"']").find("."+methods._settings.repoInfoBoxClass);
+  
             if(jsonObj.meta.status == 404) {
                 // We have an error
                 $child.find(".ui-metabrag-loading").fadeOut();
                 $("<p />").text(methods._settings.errorMessage).appendTo($child);
                 return;
             }
-            
             
             var $repoList = $("<ul />")
             .addClass("ui-metabrag-repolist")
@@ -209,8 +215,8 @@
         },
         
         
-        _insertCoderwallBadges: function (jsonObj) {
-            var $child = methods._$element.find("."+methods._settings.coderwallBadgesClass);
+        _insertCoderwallBadges: function (jsonObj, username) {
+            var $child = $(methods._$element + "[data-metabrag-coderwall-username='"+username+"']").find("."+methods._settings.coderwallBadgesClass);
             // Add short info
             var $badgeList = $("<ul />")
             .addClass("ui-metabrag-badgelist")
@@ -235,7 +241,9 @@
         _githubApiURL: "https://api.github.com/users/",
         _coderwallApiURL: "http://coderwall.com/",
         _getGithubUserInfo: function (username) {
-            $.getJSON(this._githubApiURL + username + "?callback=?", this._insertGuthubUserInfo)
+            $.getJSON(this._githubApiURL + username + "?callback=?", function (data) {
+                methods._insertGuthubUserInfo(data, username)
+            })
             .error(function () {
                 var $child = methods._$element.find("."+methods._settings.userInfoBoxClass);
                 $child.find(".ui-metabrag-loading").fadeOut();
@@ -244,7 +252,9 @@
             });
         },
         _getGithubRepoInfo: function (username) {
-            $.getJSON(this._githubApiURL + username + "/repos?callback=?", this._insertGuthubRepoInfo)
+            $.getJSON(this._githubApiURL + username + "/repos?callback=?", function(data) {
+                methods._insertGuthubRepoInfo(data, username);
+            })
             .error(function () {
                 var $child = methods._$element.find("."+methods._settings.repoInfoBoxClass);
                 $child.find(".ui-metabrag-loading").fadeOut();
@@ -253,7 +263,9 @@
             });
         },
         _getCoderwallBadges: function (username) {
-            $.getJSON(this._coderwallApiURL + username + ".json?callback=?", this._insertCoderwallBadges)
+            $.getJSON(this._coderwallApiURL + username + ".json?callback=?", function(data) {
+                methods._insertCoderwallBadges(data, username);
+            })
             .error(function () {
                 console.log("her inne???");
                 var $child = methods._$element.find("."+methods._settings.coderwallBadgesClass);
@@ -284,17 +296,18 @@
     };
   
     $.fn.metabrag.defaults = {
-        username: '',
-        showGithubUserInfo: true,
-        showGithubRepoInfo: true,
-        showCoderwallBadges: true,
-        showExtendedInfo: false,
-        showForks: false,
-        userInfoBoxClass: "ui-metabrag-github-userbox",
-        repoInfoBoxClass: "ui-metabrag-github-repobox",
-        coderwallBadgesClass: "ui-metabrag-coderwall-badges",
-        errorMessage: "Couldn't load developer data.",
-        loadingMessage: "Loading..."
+        username: '', // Global username - if only one username is supported.
+        coderwallUsername: '', // Global coderwall username
+        showGithubUserInfo: true, // Shows/hides the github user info box
+        showGithubRepoInfo: true, // Shows/hides the github repo info box
+        showCoderwallBadges: true, // Shows/hides coderwall badges
+        showExtendedInfo: false, // Shows/hides extended info in github user info box
+        showForks: false, // Shows/hides forks in repo info box
+        userInfoBoxClass: "ui-metabrag-github-userbox", // class for styling user info box
+        repoInfoBoxClass: "ui-metabrag-github-repobox", // class for styling repo info box
+        coderwallBadgesClass: "ui-metabrag-coderwall-badges", // class for styling coderwall badges
+        errorMessage: "Couldn't load developer data.", // error message on 404
+        loadingMessage: "Loading..." // String for loading text.
     };
   
 })( jQuery );
