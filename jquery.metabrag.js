@@ -8,17 +8,6 @@
  */
 (function( $ ){
     
-    var MetaBrag = function (element, options) {
-        console.log(element);
-        
-        
-        console.log("Metabrag const:");
-        console.log(this);
-        this.init();
-        
-        return element;
-    };
-    
     var methods = {
         _$element: "",
         _settings: {},
@@ -267,7 +256,6 @@
                 methods._insertCoderwallBadges(data, username);
             })
             .error(function () {
-                console.log("her inne???");
                 var $child = methods._$element.find("."+methods._settings.coderwallBadgesClass);
                 $child.find(".ui-metabrag-loading").fadeOut();
                 $("<p />").text(methods._settings.errorMessage).appendTo($child);
