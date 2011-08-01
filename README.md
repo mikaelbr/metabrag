@@ -103,6 +103,15 @@ metabrag can use two data attributes
 
 The latter is used to set a spesific username for Coderwall, if it is not the same as your Github user. 
 
+### Events
+There are 3 events set up with this plugin. They all use the namespace ```metabrag```. You can change the
+event name to be whatever you'd like. This can be done the same way you'd change any other settings.
+
+Predefined events are:
+* ```userinfoLoaded.metabrag``` - Triggered after DOM has loaded user info from github
+* ```repoinfoLoaded.metabrag``` - Triggered after DOM has loaded repo info from github
+* ```badgesLoaded.metabrag``` - Triggered after DOM has loaded badges from Coderwall
+
 ### metabrag settings
 
 Here are the settings that can be altered to customize your geek creds
@@ -120,7 +129,10 @@ Here are the settings that can be altered to customize your geek creds
     repoInfoBoxClass: "ui-metabrag-github-repobox", // class for styling repo info box
     coderwallBadgesClass: "ui-metabrag-coderwall-badges", // class for styling coderwall badges
     errorMessage: "Couldn't load developer data.", // error message on 404
-    loadingMessage: "Loading..." // String for loading text.
+    loadingMessage: "Loading...", // String for loading text.
+    eventLoadedGithubUserInfo: "userinfoLoaded.metabrag", // Event triggered when a user box is loaded
+    eventLoadedGithubRepoInfo: "repoinfoLoaded.metabrag", // Event triggered when a repo box is loaded
+    eventLoadedCoderwallBadges: "badgesLoaded.metabrag" // Event triggered when badges are loaded
 }
 ```
 
