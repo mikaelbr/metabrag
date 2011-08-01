@@ -17,63 +17,62 @@
             $this._$element = this.addClass("ui-metabrag-content");
             $this._settings = $.extend({}, $.fn.metabrag.defaults, options);
             $this._isInitialized = true;
-            $this._$element.each(function () {
-                var username = $this._settings.username;
-                // Check for overwritten data attr.
-                if(typeof $(this).attr("data-metabrag-username") != "undefined") {
-                    username = $(this).attr("data-metabrag-username");
-                } else {
-                    $(this).attr("data-metabrag-username", username);
-                } 
+
+            var username = $this._settings.username;
+            // Check for overwritten data attr.
+            if(typeof $(this).attr("data-metabrag-username") != "undefined") {
+                username = $(this).attr("data-metabrag-username");
+            } else {
+                $(this).attr("data-metabrag-username", username);
+            } 
                 
-                // Try for a coderwall spesific username
-                var coderwallUsername = username;
-                if($this._settings.coderwallUsername != "") {
-                    coderwallUsername = $this._settings.coderwallUsername;
-                }
-                // Check for overwritten data attr.
-                if(typeof $(this).attr("data-metabrag-coderwall-username") != "undefined") {
-                    coderwallUsername = $(this).attr("data-metabrag-coderwall-username");
-                } else {
-                    $(this).attr("data-metabrag-coderwall-username", coderwallUsername);
-                }
+            // Try for a coderwall spesific username
+            var coderwallUsername = username;
+            if($this._settings.coderwallUsername != "") {
+                coderwallUsername = $this._settings.coderwallUsername;
+            }
+            // Check for overwritten data attr.
+            if(typeof $(this).attr("data-metabrag-coderwall-username") != "undefined") {
+                coderwallUsername = $(this).attr("data-metabrag-coderwall-username");
+            } else {
+                $(this).attr("data-metabrag-coderwall-username", coderwallUsername);
+            }
                 
                                     
-                if(typeof username == "undefined" || username == "") {
-                    $.error( 'No username is defined for the jquery.metabrag plugin.' );
-                }
+            if(typeof username == "undefined" || username == "") {
+                $.error( 'No username is defined for the jquery.metabrag plugin.' );
+            }
                                 
-                if(!!$this._settings.showGithubUserInfo) {
-                    var $userWrapper = $("<div />")
-                    .addClass($this._settings.userInfoBoxClass)
-                    .appendTo(this);
+            if(!!$this._settings.showGithubUserInfo) {
+                var $userWrapper = $("<div />")
+                .addClass($this._settings.userInfoBoxClass)
+                .appendTo(this);
                     
-                    $("<p />").addClass("ui-metabrag-loading").text(methods._settings.loadingMessage).appendTo($userWrapper);
+                $("<p />").addClass("ui-metabrag-loading").text(methods._settings.loadingMessage).appendTo($userWrapper);
                         
-                    $this._getGithubUserInfo(username);
-                }
+                $this._getGithubUserInfo(username);
+            }
                 
-                if(!!$this._settings.showGithubRepoInfo) {
-                    var $repoWrapper = $("<div />")
-                    .addClass($this._settings.repoInfoBoxClass)
-                    .appendTo(this);
+            if(!!$this._settings.showGithubRepoInfo) {
+                var $repoWrapper = $("<div />")
+                .addClass($this._settings.repoInfoBoxClass)
+                .appendTo(this);
                     
-                    $("<p />").addClass("ui-metabrag-loading").text(methods._settings.loadingMessage).appendTo($repoWrapper);
+                $("<p />").addClass("ui-metabrag-loading").text(methods._settings.loadingMessage).appendTo($repoWrapper);
                         
-                    $this._getGithubRepoInfo(username);
-                }
+                $this._getGithubRepoInfo(username);
+            }
                 
-                if(!!$this._settings.showCoderwallBadges) {
-                    var $badgeWrapper = $("<div />")
-                    .addClass($this._settings.coderwallBadgesClass)
-                    .appendTo(this);
+            if(!!$this._settings.showCoderwallBadges) {
+                var $badgeWrapper = $("<div />")
+                .addClass($this._settings.coderwallBadgesClass)
+                .appendTo(this);
                     
-                    $("<p />").addClass("ui-metabrag-loading").text(methods._settings.loadingMessage).appendTo($badgeWrapper);
+                $("<p />").addClass("ui-metabrag-loading").text(methods._settings.loadingMessage).appendTo($badgeWrapper);
                         
-                    $this._getCoderwallBadges(coderwallUsername);
-                }
+                $this._getCoderwallBadges(coderwallUsername);
+            }
                 
-            });
             return this;
             
         },
@@ -145,6 +144,7 @@
             }
             
             $child.find(".ui-metabrag-loading").fadeOut();
+            methods._$element.trigger(methods._settings.eventLoadedGithubUserInfo, [jsonObj, username]);
         },
         
         _insertList: function (element, data, fields) {
@@ -201,6 +201,7 @@
             });
             
             $child.find(".ui-metabrag-loading").fadeOut();
+            methods._$element.trigger(methods._settings.eventLoadedGithubRepoInfo, [jsonObj, username]);
         },
         
         
@@ -216,6 +217,7 @@
             });
             
             $child.find(".ui-metabrag-loading").fadeOut();
+            methods._$element.trigger(methods._settings.eventLoadedCoderwallBadges, [jsonObj, username]);
         },
         
         _insertBadge: function (element, data) {
@@ -295,7 +297,10 @@
         repoInfoBoxClass: "ui-metabrag-github-repobox", // class for styling repo info box
         coderwallBadgesClass: "ui-metabrag-coderwall-badges", // class for styling coderwall badges
         errorMessage: "Couldn't load developer data.", // error message on 404
-        loadingMessage: "Loading..." // String for loading text.
+        loadingMessage: "Loading...", // String for loading text.
+        eventLoadedGithubUserInfo: "userinfoLoaded.metabrag",
+        eventLoadedGithubRepoInfo: "repoinfoLoaded.metabrag",
+        eventLoadedCoderwallBadges: "badgesLoaded.metabrag"
     };
   
 })( jQuery );
