@@ -109,7 +109,7 @@ event name to be whatever you'd like. This can be done the same way you'd change
 
 Predefined events are:
 
-* userinfoLoaded.metabrag Triggered after DOM has loaded user info from github
+* ```userinfoLoaded.metabrag```: Triggered after DOM has loaded user info from github
 * repoinfoLoaded.metabrag Triggered after DOM has loaded repo info from github
 * badgesLoaded.metabrag Triggered after DOM has loaded badges from Coderwall
 
