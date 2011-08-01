@@ -108,9 +108,10 @@ There are 3 events set up with this plugin. They all use the namespace ```metabr
 event name to be whatever you'd like. This can be done the same way you'd change any other settings.
 
 Predefined events are:
-* userinfoLoaded.metabrag: Triggered after DOM has loaded user info from github
-* repoinfoLoaded.metabrag: Triggered after DOM has loaded repo info from github
-* badgesLoaded.metabrag: Triggered after DOM has loaded badges from Coderwall
+
+* userinfoLoaded.metabrag Triggered after DOM has loaded user info from github
+* repoinfoLoaded.metabrag Triggered after DOM has loaded repo info from github
+* badgesLoaded.metabrag Triggered after DOM has loaded badges from Coderwall
 
 ### metabrag settings
 
