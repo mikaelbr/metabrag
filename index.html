@@ -12,15 +12,23 @@
             $(function() {
                 $.fn.metabrag.defaults.loadingMessage = "Loading!";
                 $(".metabrag").metabrag({
-                    showForks: true
+                    showForks: false
                 });
             });
+            
+            $(".metabrag").live("userinfoLoaded.metabrag", function (event, jsonObj, username) {
+                console.log("userinfoLoaded.metabrag event triggered:");
+                console.log(jsonObj);
+                console.log(username);
+            })
         </script>
     </head>
     <body>
         <div class="page-wrapper">
             <!-- The metabrag plugin will automaticly fetch the username -->
             <div class="metabrag" data-metabrag-username="mikaelbr"></div>
+            
+            <div class="metabrag" data-metabrag-username="dustin"></div>
         </div>
     </body>
 </html>
