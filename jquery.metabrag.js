@@ -49,7 +49,7 @@
                     .addClass($this._settings.userInfoBoxClass)
                     .appendTo(this);
                     
-                    $("<p />").addClass("ui-metabrag-loading").text(methods._settings.loadingMessage).appendTo($userWrapper);
+                    $("<p />").addClass("ui-metabrag-loading").html(methods._settings.loadingMessage).appendTo($userWrapper);
                     $this._getGithubUserInfo(username);
                 }
                 
@@ -58,7 +58,7 @@
                     .addClass($this._settings.repoInfoBoxClass)
                     .appendTo(this);
                     
-                    $("<p />").addClass("ui-metabrag-loading").text(methods._settings.loadingMessage).appendTo($repoWrapper);
+                    $("<p />").addClass("ui-metabrag-loading").html(methods._settings.loadingMessage).appendTo($repoWrapper);
                         
                     $this._getGithubRepoInfo(username);
                 }
@@ -68,7 +68,7 @@
                     .addClass($this._settings.coderwallBadgesClass)
                     .appendTo(this);
                     
-                    $("<p />").addClass("ui-metabrag-loading").text(methods._settings.loadingMessage).appendTo($badgeWrapper);
+                    $("<p />").addClass("ui-metabrag-loading").html(methods._settings.loadingMessage).appendTo($badgeWrapper);
                         
                     $this._getCoderwallBadges(coderwallUsername);
                 }
@@ -98,6 +98,15 @@
                 $("<p />").text(methods._settings.errorMessage).appendTo($child);
                 return;
             }
+                
+            // Add title 
+            $("<a />")
+            .attr("href", jsonObj.data.html_url)
+            .html(jsonObj.data.name)
+            .append($("<span />").html(jsonObj.data.login))
+            .wrap("<h2 />")
+            .parent()
+            .appendTo($child);
             
             // Add avatar
             var $avatarBox = $("<div />")
@@ -108,15 +117,6 @@
             .attr("src", jsonObj.data.avatar_url)
             .attr("alt", jsonObj.data.name)
             .appendTo($avatarBox);
-                
-            // Add title 
-            $("<a />")
-            .attr("href", jsonObj.data.html_url)
-            .html(jsonObj.data.name)
-            .append($("<span />").html(jsonObj.data.login))
-            .wrap("<h2 />")
-            .parent()
-            .appendTo($child);
                 
             // Add short info
             var $infoList = $("<ul />")
