@@ -1,0 +1,230 @@
+/* 
+    Document   : metabrag.iphone.demo
+    Created on : Aug 1, 2011, 9:24:31 PM
+    Author     : mikaelbrevik
+    Description:
+        Demo app for metabrag
+*/
+#main-wrapper {
+}
+#main-wrapper > .ui-content {
+    padding: 0px;
+    margin: 0px;
+    background: url("images/texture_075.png") #333;
+    
+}
+
+/**** Project spesific ****/
+
+.ui-content.ui-scrollview-clip,
+.ui-content.ui-scrollview-clip > div.ui-scrollview-view,
+.ui-content.ui-scrollview-clip > .ui-listview.ui-scrollview-view{
+    margin: 0;
+    padding: 0px;
+}
+
+.metabrag-box > .ui-scrollview-view > div {
+    width: 320px;
+    min-height: 350px;
+    float: left;
+}
+.metabrag-box  > .ui-scrollview-view > div > div {
+    height: 350px;
+}
+
+
+.metabrag-box {
+    background: url("images/texture_075.png") #333;
+    overflow: hidden;
+    height: 350px;
+    width: 320px;
+}
+.metabrag-box > .ui-scrollview-view {
+    width: 960px;
+    background: url("images/texture_075.png") #333;
+}
+
+
+#metabrag-header {
+    background: -webkit-gradient(linear, left top, left bottom, from(#1b8fd1), to(#006baa));
+    background: -moz-linear-gradient(top,  #1b8fd1,  #006baa);
+    border: 1px solid #40a0d8;
+    box-shadow: 0px 0px 3px #000;
+    -webkit-box-shadow: 0px 0px 3px #000;
+    -moz-box-shadow: 0px 0px 3px #000;
+    z-index: 999;
+}
+
+.indicators {
+    padding-top: 2px;
+    text-align: center;
+}
+
+.indicators span {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 10px;
+    background: #eee;
+}
+
+span.indicator-active {
+    background: #006baa;
+}
+
+
+/** metabrag box styling **/
+
+.ui-metabrag-github-userbox .ui-metabrag-avatar { 
+    float: left;
+    margin-right: 30px;
+    margin-bottom: 20px;
+}
+
+.ui-metabrag-github-userbox .ui-metabrag-avatar img { 
+    border: 2px solid #1b8fd1;
+    display: block;
+    border-radius: 5px;
+}
+
+.ui-metabrag-github-userbox h2 {
+    font-size: 1.6em;
+    margin: 10px 0px;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 5px;
+    text-shadow: 1px 1px 0px #999;
+}
+
+.ui-metabrag-github-userbox h2 span { 
+    font-size: 0.7em;
+    margin-left: 10px;
+    font-weight: 100;
+}
+
+.ui-metabrag-github-userbox h2 a:link, 
+.ui-metabrag-github-userbox h2 a:visited { 
+    text-decoration: none;
+    color: #eee;
+}
+.ui-metabrag-github-userbox h2 a:hover, 
+.ui-metabrag-github-userbox h2 a:active { 
+    color: #999;
+}
+
+.ui-metabrag-github-userbox ul {
+    color: #eee;
+    text-shadow: 1px 1px 0px #333;
+    font-size: 1.1em;
+    padding: 0px;
+}
+
+.ui-metabrag-github-userbox ul li {
+    margin-bottom: 5px;
+}
+
+.ui-metabrag-github-userbox .ui-metabrag-extended-infolist {
+    clear: left;
+    list-style-type: none;
+}
+.ui-metabrag-github-userbox .ui-metabrag-extended-infolist li {
+    margin-bottom: 10px;
+}
+
+.ui-metabrag-github-userbox .ui-metabrag-extended-infolist li span {
+    font-weight: bold;
+    display: block;
+    font-size: 0.8em;
+}
+
+/** box structures **/
+
+.ui-metabrag-github-userbox, 
+.ui-metabrag-github-repobox,
+.ui-metabrag-coderwall-badges {
+    font-size: 14px;
+    width: 320px;
+    position: relative;
+    float: left;
+    background: url("images/texture_075.png") #333;
+}
+
+.metabrag-box > .ui-scrollview-view .ui-scrollview-view {
+    background: url("images/texture_075.png") #333;
+    padding: 0px 10px;
+    width: 300px;
+    min-height: 350px;
+}
+
+.ui-metabrag-github-repobox ul {
+    list-style-type: none;
+    margin: 0px; padding: 0px;
+}
+
+.ui-metabrag-github-repobox .ui-metabrag-repolist > li {
+    margin: 0px; 
+    background: -webkit-gradient(linear, left top, left bottom, from(#B6B6C3), to(#9B9BAC));
+    background: -moz-linear-gradient(top,  #B6B6C3,  #9B9BAC);
+    display: block;
+    clear: both;
+    border-bottom: 1px solid #666;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.ui-metabrag-github-repobox .ui-metabrag-repolist > li:active {
+    background: -webkit-gradient(linear, left top, left bottom, from(#9B9BAC), to(#B6B6C3));
+    background: -moz-linear-gradient(top, #9B9BAC, #B6B6C3);
+}
+
+.ui-metabrag-github-repobox div.ui-scrollview-clip div.ui-scrollview-view {
+    padding: 0px;
+    width: 320px;
+}
+
+.ui-metabrag-github-repobox .ui-metabrag-repolist li h3 {
+    width: 60%;
+    display: block;
+    float:left;
+    margin:0px; padding:0px;
+    margin-bottom: 10px;
+}
+
+.ui-metabrag-github-repobox .ui-metabrag-repolist li h3 a:link,
+.ui-metabrag-github-repobox .ui-metabrag-repolist li h3 a:visited {
+    color: #000;
+    text-decoration: none;
+}
+
+.ui-metabrag-github-repobox .ui-metabrag-repolist li ul {
+    float: right;
+    width: 40%;
+}
+.ui-metabrag-github-repobox .ui-metabrag-repolist li ul li {
+    display: inline-block;
+    color: #444;
+    font-size: 0.8em;
+}
+.ui-metabrag-github-repobox .ui-metabrag-repolist li ul li:last-child {
+    margin-left: 10px;
+}
+
+.ui-metabrag-github-repobox .ui-metabrag-repolist li p {
+    clear: both;
+}
+
+.ui-metabrag-loading {
+    position: absolute;
+    top: 80px;
+    border-radius: 5px;
+    padding: 30px;
+    font-size: 1em;
+    background: rgba(10, 10, 10, 0.5);
+    color: #fff;
+    text-shadow: none;
+    margin: 0px auto;
+    left: 35%;
+}
+
+.ui-metabrag-coderwall-badges ul {
+    list-style-type: none;
+}

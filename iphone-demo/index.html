@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+    <head>
+        <title>metabrag</title>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no"> 
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="../jquery.min.js"></script>
+        <script type="text/javascript" src="jquery.mobile.js"></script>
+        <script type="text/javascript" src="jquery.easing.js"></script>
+        <script type="text/javascript" src="jquery.mobile.scrollview.js"></script>
+        <script type="text/javascript" src="scrollview.js"></script>
+        <script type="text/javascript" src="../jquery.metabrag.js"></script>
+        <link rel="stylesheet" type="text/css" href="jquery.mobile.css" />
+        <link rel="stylesheet" type="text/css" href="jquery.mobile.scrollview.css" />
+        <link rel="stylesheet" type="text/css" href="metabrag.iphone.demo.css" />
+
+        <script type="text/javascript">
+            $(function() {
+                $.fn.metabrag.defaults.loadingMessage = 'fetching data';
+                $(".metabrag-box").metabrag({
+                    showForks: false,
+                    showExtendedInfo: true
+                });
+            });
+            
+            
+            $(".metabrag-box").live("scrollpage", function (event, position) {
+                var page = (position.x/$("#ex4").width());
+                if(typeof(page)=='number' && parseInt(page)==page) {
+                    $(".indicators span").removeClass("indicator-active");
+                    $(".indicators span").eq(page).addClass("indicator-active");
+                }
+            });
+            
+            $(".metabrag-box").live("userinfoLoaded.metabrag", function (event, jsonObj, username) {
+                var $elm = $(this+"[data-metabrag-username='"+username+"']").find(".ui-metabrag-github-userbox");
+                $elm.wrapInner("<div data-scroll='y'/>");
+                updateScrollView($elm);
+            });
+            
+            $(".metabrag-box").live("repoinfoLoaded.metabrag", function (event, jsonObj, username) {
+                var $elm = $(this+"[data-metabrag-username='"+username+"']").find(".ui-metabrag-github-repobox");
+                $elm.wrapInner("<div data-scroll='y'/>");
+                updateScrollView($elm);
+            });
+            
+            $(".metabrag-box").live("badgesLoaded.metabrag", function (event, jsonObj, username) {
+                var $elm = $(this+"[data-metabrag-coderwall-username='"+username+"']").find(".ui-metabrag-coderwall-badges");
+                $elm.wrapInner("<div data-scroll='y' />");
+                updateScrollView($elm);
+            });
+            
+            
+        </script>
+    </head>
+    <body>
+        <div data-role="page" id="main-wrapper">
+
+            <div data-role="header" id="metabrag-header">
+                <h1>metabrag</h1>
+            </div>
+
+            <div data-role="content">
+                <div id="ex4" data-scroll="xp" class="metabrag-box" data-metabrag-username="mikaelbr">
+                    
+                </div>
+                <div class="indicators">
+                    <span class="indicator-active"></span>
+                    <span ></span>
+                    <span ></span>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
