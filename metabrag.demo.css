@@ -20,7 +20,7 @@ body {
 }
 
 .ui-metabrag-github-userbox .ui-metabrag-avatar { 
-
+    float: left;
 }
 
 .ui-metabrag-github-userbox .ui-metabrag-avatar img { 
@@ -37,7 +37,9 @@ body {
     z-index: 999;
 }
 .ui-metabrag-github-userbox h2 {
+    float:right;
     display: block;
+    width: 84%;
 }
 .ui-metabrag-github-userbox h2 a:link, 
 .ui-metabrag-github-userbox h2 a:visited { 
@@ -49,7 +51,11 @@ body {
 }
 
 .ui-metabrag-github-userbox ul {
+    clear: right;
     color: #eee;
+    float:right;
+    display: block;
+    width: 84%;
     font-size: 0.8em;
     text-shadow: 1px 1px 0px #000;
 }
@@ -150,3 +156,5 @@ body {
     background: -webkit-gradient(linear, left top, left bottom, from(#006baa), to(#1b8fd1));
     background: -moz-linear-gradient(top,  #1b8fd1,  #006baa);
 }
+
+
