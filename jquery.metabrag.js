@@ -3,7 +3,7 @@
  *
  * Copyright 2011, Mikael Brevik
  * Licensed under the GPL Version 2 licens.
- *
+ * 
  * Date: Thu Jul 29 21:48:21 2011 +0100
  */
 (function( $ ){
