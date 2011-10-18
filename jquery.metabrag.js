@@ -8,109 +8,115 @@
  */
 (function( $ ){
     
-    
+    var methods = {
 
-    // Define metabrag as a part of the jQuery namespace. 
-    $.fn.metabrag = function( method ) {
-        var $that = this;
-        this.methods = {
-            _$element: "",
-            _settings: {},
-            _isInitialized: false,
             init : function( options ) {
-                var $this = $that.methods;
-                $this._$element = this.addClass("ui-metabrag-content");
-                $this._settings = $.extend({}, $.fn.metabrag.defaults, options);
-                $this._isInitialized = true;
 
-                $this.refresh();
+                return this.each(function(){
                     
-                return this;
-                
+                    var $this = $(this),
+                     data = $this.data('metabrag');
+
+                    // If the plugin hasn't been initialized yet
+                    if (!data ) {
+
+                        $this.addClass("ui-metabrag-content");
+
+                        $(this).data('metabrag', {
+                           target : $this,
+                           _settings : $.extend({}, $.fn.metabrag.defaults, options)
+                        });
+
+                        methods.refresh.apply( this, [] );
+                    }
+                });
             },
             
             refresh: function () {
-                
-                if(!this._isInitialized) {
+
+                var $this = $(this),
+                     data = $this.data('metabrag');
+
+                if(!data) {
                     $.error( 'Metabrag has never been initialized.' );
                 }
 
-                var $this = this;
+                var username = data._settings.username;
+                
+                $this.empty();
 
-                console.log("her");
-                console.log(this);
+                // Check for overwritten data attr.
+                if(typeof $this.attr("data-metabrag-username") !== "undefined") {
+                    username = $this.attr("data-metabrag-username");
+                } else {
+                    $this.attr("data-metabrag-username", username);
+                } 
 
-                $this._$element.each(function () {
-                    console.log(this);
-                    var username = $this._settings.username;
-                    
-                    $(this).empty();
+                // Try for a coderwall spesific username
+                var coderwallUsername = username;
+                if(data._settings.coderwallUsername != "") {
+                    coderwallUsername = data._settings.coderwallUsername;
+                }
 
-                    // Check for overwritten data attr.
-                    if(typeof $(this).attr("data-metabrag-username") != "undefined") {
-                        username = $(this).attr("data-metabrag-username");
-                    } else {
-                        $(this).attr("data-metabrag-username", username);
-                    } 
-                    
-                    // Try for a coderwall spesific username
-                    var coderwallUsername = username;
-                    if($this._settings.coderwallUsername != "") {
-                        coderwallUsername = $this._settings.coderwallUsername;
-                    }
-                    // Check for overwritten data attr.
-                    if(typeof $(this).attr("data-metabrag-coderwall-username") != "undefined") {
-                        coderwallUsername = $(this).attr("data-metabrag-coderwall-username");
-                    } else {
-                        $(this).attr("data-metabrag-coderwall-username", coderwallUsername);
-                    }
-                    
-                                        
-                    if(typeof username == "undefined" || username == "") {
-                        $.error( 'No username is defined for the jquery.metabrag plugin.' );
-                    }
+                // Check for overwritten data attr.
+                if(typeof $this.attr("data-metabrag-coderwall-username") !== "undefined") {
+                    coderwallUsername = $this.attr("data-metabrag-coderwall-username");
+                } else {
+                    $this.attr("data-metabrag-coderwall-username", coderwallUsername);
+                }
                                     
-                    if(!!$this._settings.showGithubUserInfo) {
-                        var $userWrapper = $("<div />")
-                        .addClass($this._settings.userInfoBoxClass)
-                        .appendTo(this);
-                        
-                        $("<p />").addClass("ui-metabrag-loading").html($this._settings.loadingMessage).appendTo($userWrapper);
-                        $this._getGithubUserInfo(username);
-                    }
+                if(typeof username === "undefined" || username == "") {
+                    $.error( 'No username is defined for the jquery.metabrag plugin.' );
+                }
+
+                if(!!data._settings.showGithubUserInfo) {
+                    var $userWrapper = $("<div />")
+                    .addClass(data._settings.userInfoBoxClass)
+                    .appendTo(this);
                     
-                    if(!!$this._settings.showGithubRepoInfo) {
-                        var $repoWrapper = $("<div />")
-                        .addClass($this._settings.repoInfoBoxClass)
-                        .appendTo(this);
-                        
-                        $("<p />").addClass("ui-metabrag-loading").html($this._settings.loadingMessage).appendTo($repoWrapper);
-                            
-                        $this._getGithubRepoInfo(username);
-                    }
+                    $("<p />").addClass("ui-metabrag-loading").html(data._settings.loadingMessage).appendTo($userWrapper);
+                    // $this._getGithubUserInfo(username);
+                    methods._getGithubUserInfo.apply( this, [username] );
+                }
+                
+                if(!!data._settings.showGithubRepoInfo) {
+                    var $repoWrapper = $("<div />")
+                    .addClass(data._settings.repoInfoBoxClass)
+                    .appendTo(this);
                     
-                    if(!!$this._settings.showCoderwallBadges) {
-                        var $badgeWrapper = $("<div />")
-                        .addClass($this._settings.coderwallBadgesClass)
-                        .appendTo(this);
+                    $("<p />").addClass("ui-metabrag-loading").html(data._settings.loadingMessage).appendTo($repoWrapper);
                         
-                        $("<p />").addClass("ui-metabrag-loading").html($this._settings.loadingMessage).appendTo($badgeWrapper);
-                            
-                        $this._getCoderwallBadges(coderwallUsername);
-                    }
-                });
+                    //$this._getGithubRepoInfo(username);
+                    methods._getGithubRepoInfo.apply( this, [username] );
+                }
+                
+                if(!!data._settings.showCoderwallBadges) {
+                    var $badgeWrapper = $("<div />")
+                    .addClass(data._settings.coderwallBadgesClass)
+                    .appendTo(this);
+                    
+                    $("<p />").addClass("ui-metabrag-loading").html(data._settings.loadingMessage).appendTo($badgeWrapper);
+                        
+                    // $this._getCoderwallBadges(coderwallUsername);
+                    methods._getCoderwallBadges.apply( this, [coderwallUsername] );
+                }
                 
                 return this;
             },
                     
             _insertGithubUserInfo: function (jsonObj, username) {
-                var $child = $(this._$element).closest("[data-metabrag-username='"+username+"']").find("."+this._settings.userInfoBoxClass);
+
+                var $this = $(this),
+                     data = $this.data('metabrag');
+                
+                console.log($this);
+                var $child = $this.closest("[data-metabrag-username='"+username+"']").find("."+data._settings.userInfoBoxClass);
                 if(jsonObj.meta.status == 404) {
                     // We have an error
                     $child.find(".ui-metabrag-loading").fadeOut("normal", function () {
                         $(this).remove();
                     });
-                    $("<p />").text(this._settings.errorMessage).appendTo($child);
+                    $("<p />").text(data._settings.errorMessage).appendTo($child);
                     return;
                 }
                     
@@ -138,19 +144,19 @@
                 .addClass("ui-metabrag-infolist")
                 .appendTo($child);
                 
-                this._insertList($infoList, jsonObj.data, {
+                methods._insertList($infoList, jsonObj.data, {
                     public_repos: "Public repos",
                     public_gists: "Public gists",
                     followers: "Followers",
                     following: "Following"
                 });
                 
-                if(!!this._settings.showExtendedInfo) {
+                if(!!data._settings.showExtendedInfo) {
                     var $eInfoList = $("<ul />")
                     .addClass("ui-metabrag-extended-infolist")
                     .appendTo($child);
                 
-                    this._insertList($eInfoList, jsonObj.data, {
+                    methods._insertList($eInfoList, jsonObj.data, {
                         company: "Company",
                         type: "Type of account",
                         location: "Location",
@@ -164,7 +170,7 @@
                 $child.find(".ui-metabrag-loading").fadeOut("normal", function () {
                     $(this).remove();
                 });
-                $child.trigger(this._settings.eventLoadedGithubUserInfo, [jsonObj, username]);
+                $child.trigger(data._settings.eventLoadedGithubUserInfo, [jsonObj, username]);
 
             },
             
@@ -182,25 +188,27 @@
             },
             
             _insertGithubRepoInfo: function (jsonObj, username) {
-                var $child = $(this._$element).closest("[data-metabrag-username='"+username+"']").find("."+this._settings.repoInfoBoxClass);
+
+                var $this = $(this),
+                     data = $this.data('metabrag');
+
+                var $child = $this.closest("[data-metabrag-username='"+username+"']").find("."+data._settings.repoInfoBoxClass);
       
                 if(jsonObj.meta.status == 404) {
                     // We have an error
                     $child.find(".ui-metabrag-loading").fadeOut("normal", function () {
                         $(this).remove();
                     });
-                    $("<p />").text(this._settings.errorMessage).appendTo($child);
-                    return;
+                    $("<p />").text(data._settings.errorMessage).appendTo($child);
+                    return this;
                 }
                 
                 var $repoList = $("<ul />")
                 .addClass("ui-metabrag-repolist")
                 .appendTo($child);
                 
-
-                var $this = this;
                 $(jsonObj.data).each(function () {
-                    if(!$this._settings.showForks && this.fork) {
+                    if(!data._settings.showForks && this.fork) {
                         return;
                     }
                     $listElement = $("<li />");
@@ -213,7 +221,7 @@
                     .parent()
                     .appendTo($listElement);
                         
-                    $this._insertList($("<ul />"), this, {
+                    methods._insertList($("<ul />"), this, {
                         forks: "Forks",
                         watchers: "Watchers"
                     }).appendTo($listElement);
@@ -228,27 +236,29 @@
                 $child.find(".ui-metabrag-loading").fadeOut("normal", function () {
                     $(this).remove();
                 });
-                $child.trigger(this._settings.eventLoadedGithubRepoInfo, [jsonObj, username]);
+                $child.trigger(data._settings.eventLoadedGithubRepoInfo, [jsonObj, username]);
             },
             
             
             _insertCoderwallBadges: function (jsonObj, username) {
-                var $child = $(this._$element).closest("[data-metabrag-coderwall-username='"+username+"']").find("."+this._settings.coderwallBadgesClass);
+
+                var $this = $(this),
+                     data = $this.data('metabrag');
+
+                var $child = $(this).closest("[data-metabrag-coderwall-username='"+username+"']").find("."+data._settings.coderwallBadgesClass);
                 // Add short info
                 var $badgeList = $("<ul />")
                 .addClass("ui-metabrag-badgelist")
                 .appendTo($child);
 
-                var $this = this;
-
                 $(jsonObj.data.badges).each(function () {
-                    $this._insertBadge($badgeList, this);
+                    methods._insertBadge($badgeList, this);
                 });
                 
                 $child.find(".ui-metabrag-loading").fadeOut("normal", function () {
                     $(this).remove();
                 });
-                $child.trigger(this._settings.eventLoadedCoderwallBadges, [jsonObj, username]);
+                $child.trigger(data._settings.eventLoadedCoderwallBadges, [jsonObj, username]);
             },
             
             _insertBadge: function (element, data) {
@@ -263,50 +273,63 @@
             _githubApiURL: "https://api.github.com/users/",
             _coderwallApiURL: "http://coderwall.com/",
             _getGithubUserInfo: function (username) {
-                var $this = this;
-                $.getJSON(this._githubApiURL + username + "?callback=?", function (data) {
-                    $this._insertGithubUserInfo(data, username);
+                var $this = $(this),
+                     data = $this.data('metabrag');
+
+                $.getJSON(methods._githubApiURL + username + "?callback=?", function (data) {
+                    // $this._insertGithubUserInfo(data, username);
+                    methods._insertGithubUserInfo.apply( $this, [data, username] );
                 })
                 .error(function () {
-                    var $child = $this._$element.find("."+$this._settings.userInfoBoxClass);
+                    var $child = this.find("."+data._settings.userInfoBoxClass);
                     $child.find(".ui-metabrag-loading").fadeOut();
-                    $("<p />").text($this._settings.errorMessage).appendTo($child);
+                    $("<p />").text(data._settings.errorMessage).appendTo($child);
                     return;
                 });
             },
             _getGithubRepoInfo: function (username) {
-                var $this = this;
-                $.getJSON($this._githubApiURL + username + "/repos?callback=?", function(data) {
-                    $this._insertGithubRepoInfo(data, username);
+                var $this = $(this),
+                     data = $this.data('metabrag');
+
+                
+                $.getJSON(methods._githubApiURL + username + "/repos?callback=?", function(data) {
+                    // $this._insertGithubRepoInfo(data, username);
+                    methods._insertGithubRepoInfo.apply( $this, [data, username] );
                 })
                 .error(function () {
-                    var $child = $this._$element.find("."+$this._settings.repoInfoBoxClass);
+                    var $child = this.find("."+data._settings.repoInfoBoxClass);
                     $child.find(".ui-metabrag-loading").fadeOut();
-                    $("<p />").text($this._settings.errorMessage).appendTo($child);
+                    $("<p />").text(data._settings.errorMessage).appendTo($child);
                     return;
                 });
             },
             _getCoderwallBadges: function (username) {
-                var $this = this;
-                $.getJSON(this._coderwallApiURL + username + ".json?callback=?", function(data) {
-                    $this._insertCoderwallBadges(data, username);
+                var $this = $(this),
+                     data = $this.data('metabrag');
+
+                $.getJSON(methods._coderwallApiURL + username + ".json?callback=?", function(data) {
+                    // $this._insertCoderwallBadges(data, username);
+                    methods._insertCoderwallBadges.apply( $this, [data, username] );
                 })
                 .error(function () {
-                    var $child = $this._$element.find("."+$this._settings.coderwallBadgesClass);
+                    var $child = this.find("."+data._settings.coderwallBadgesClass);
                     $child.find(".ui-metabrag-loading").fadeOut();
-                    $("<p />").text($this._settings.errorMessage).appendTo($child);
+                    $("<p />").text(data._settings.errorMessage).appendTo($child);
                     return;
                 });
             }
         };
+
+    // Define metabrag as a part of the jQuery namespace. 
+    $.fn.metabrag = function( method ) {
         
         // Allow method calls (but not prefixed by _
         if ( typeof method == "string" && method.substr(0,1) != "_" && methods[ method ] ) {
-            return this.methods[method].apply(this, Array.prototype.slice.call( arguments, 1 ));
+            return methods[method].call(this, Array.prototype.slice.call( arguments, 1 ));
         } 
         // If argument is object or not set, init plugin.
         else if ( typeof method === 'object' || ! method ) {
-            return this.methods.init.apply( this, arguments );
+            return methods.init.apply( this, arguments );
         } 
         // No method found by argument input. Could be a private method.
         else {
