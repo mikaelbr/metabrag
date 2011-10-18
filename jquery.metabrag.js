@@ -109,7 +109,6 @@
                 var $this = $(this),
                      data = $this.data('metabrag');
                 
-                console.log($this);
                 var $child = $this.closest("[data-metabrag-username='"+username+"']").find("."+data._settings.userInfoBoxClass);
                 if(jsonObj.meta.status == 404) {
                     // We have an error
