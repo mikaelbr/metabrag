@@ -4,7 +4,7 @@
         <title>metabrag</title>
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no"> 
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script type="text/javascript" src="../jquery.min.js"></script>
         <script type="text/javascript" src="jquery.mobile.js"></script>
@@ -24,8 +24,8 @@
                     showExtendedInfo: true
                 });
             });
-            
-            
+
+
             $(".metabrag-box").live("scrollpage", function (event, position) {
                 var page = (position.x/$("#ex4").width());
                 if(typeof(page)=='number' && parseInt(page)==page) {
@@ -33,26 +33,26 @@
                     $(".indicators span").eq(page).addClass("indicator-active");
                 }
             });
-            
+
             $(".metabrag-box").live("userinfoLoaded.metabrag", function (event, jsonObj, username) {
                 var $elm = $(this+"[data-metabrag-username='"+username+"']").find(".ui-metabrag-github-userbox");
                 $elm.wrapInner("<div data-scroll='y'/>");
                 updateScrollView($elm);
             });
-            
+
             $(".metabrag-box").live("repoinfoLoaded.metabrag", function (event, jsonObj, username) {
                 var $elm = $(this+"[data-metabrag-username='"+username+"']").find(".ui-metabrag-github-repobox");
                 $elm.wrapInner("<div data-scroll='y'/>");
                 updateScrollView($elm);
             });
-            
+
             $(".metabrag-box").live("badgesLoaded.metabrag", function (event, jsonObj, username) {
                 var $elm = $(this+"[data-metabrag-coderwall-username='"+username+"']").find(".ui-metabrag-coderwall-badges");
                 $elm.wrapInner("<div data-scroll='y' />");
                 updateScrollView($elm);
             });
-            
-            
+
+
         </script>
     </head>
     <body>
@@ -64,7 +64,7 @@
 
             <div data-role="content">
                 <div id="ex4" data-scroll="xp" class="metabrag-box" data-metabrag-username="mikaelbr">
-                    
+
                 </div>
                 <div class="indicators">
                     <span class="indicator-active"></span>

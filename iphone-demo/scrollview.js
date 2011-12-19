@@ -50,7 +50,7 @@ $(":jqmData(role='page')").live("pageshow", function(event) {
     // into the jqm page processing code when scrollview support is "official"
     // instead of "experimental".
     updateScrollView($page);
-    
+
 
     // For the demos, we want to make sure the page being shown has a content
     // area that is sized to fit completely within the viewport. This should

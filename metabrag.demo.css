@@ -1,9 +1,9 @@
-/* 
+/*
     Document   : metabrag.demo
     Created on : Jul 30, 2011, 10:10:09 PM
     Author     : mikaelbrevik
     Description:
-        Demo styling of the metabrag jquery plugin. 
+        Demo styling of the metabrag jquery plugin.
 */
 * {padding: 0px; margin: 0px;}
 body {
@@ -19,11 +19,11 @@ body {
     margin: 0px auto;
 }
 
-.ui-metabrag-github-userbox .ui-metabrag-avatar { 
+.ui-metabrag-github-userbox .ui-metabrag-avatar {
     float: left;
 }
 
-.ui-metabrag-github-userbox .ui-metabrag-avatar img { 
+.ui-metabrag-github-userbox .ui-metabrag-avatar img {
     border: 1px solid #1871a5;
 }
 
@@ -41,9 +41,9 @@ body {
     display: block;
     width: 84%;
 }
-.ui-metabrag-github-userbox h2 a:link, 
-.ui-metabrag-github-userbox h2 a:visited { 
-    font-family: "Georgia", Helvetica, sans-serif; 
+.ui-metabrag-github-userbox h2 a:link,
+.ui-metabrag-github-userbox h2 a:visited {
+    font-family: "Georgia", Helvetica, sans-serif;
     font-size: 1.5em;
     text-decoration: none;
     color: #eee;
@@ -71,11 +71,11 @@ body {
     font-weight: bold;
 }
 
-.ui-metabrag-github-userbox h2 a:hover, 
-.ui-metabrag-github-userbox h2 a:active { 
+.ui-metabrag-github-userbox h2 a:hover,
+.ui-metabrag-github-userbox h2 a:active {
     color: #ddd;
 }
-.ui-metabrag-github-userbox h2 span { 
+.ui-metabrag-github-userbox h2 span {
     font-size: 0.7em;
     font-weight: 100;
 }

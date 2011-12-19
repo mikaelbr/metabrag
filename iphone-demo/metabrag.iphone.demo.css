@@ -1,4 +1,4 @@
-/* 
+/*
     Document   : metabrag.iphone.demo
     Created on : Aug 1, 2011, 9:24:31 PM
     Author     : mikaelbrevik
@@ -11,7 +11,7 @@
     padding: 0px;
     margin: 0px;
     background: url("images/texture_075.png") #333;
-    
+
 }
 
 /**** Project spesific ****/
@@ -75,13 +75,13 @@ span.indicator-active {
 
 /** metabrag box styling **/
 
-.ui-metabrag-github-userbox .ui-metabrag-avatar { 
+.ui-metabrag-github-userbox .ui-metabrag-avatar {
     float: left;
     margin-right: 30px;
     margin-bottom: 20px;
 }
 
-.ui-metabrag-github-userbox .ui-metabrag-avatar img { 
+.ui-metabrag-github-userbox .ui-metabrag-avatar img {
     border: 2px solid #1b8fd1;
     display: block;
     border-radius: 5px;
@@ -95,19 +95,19 @@ span.indicator-active {
     text-shadow: 1px 1px 0px #999;
 }
 
-.ui-metabrag-github-userbox h2 span { 
+.ui-metabrag-github-userbox h2 span {
     font-size: 0.7em;
     margin-left: 10px;
     font-weight: 100;
 }
 
-.ui-metabrag-github-userbox h2 a:link, 
-.ui-metabrag-github-userbox h2 a:visited { 
+.ui-metabrag-github-userbox h2 a:link,
+.ui-metabrag-github-userbox h2 a:visited {
     text-decoration: none;
     color: #eee;
 }
-.ui-metabrag-github-userbox h2 a:hover, 
-.ui-metabrag-github-userbox h2 a:active { 
+.ui-metabrag-github-userbox h2 a:hover,
+.ui-metabrag-github-userbox h2 a:active {
     color: #999;
 }
 
@@ -138,7 +138,7 @@ span.indicator-active {
 
 /** box structures **/
 
-.ui-metabrag-github-userbox, 
+.ui-metabrag-github-userbox,
 .ui-metabrag-github-repobox,
 .ui-metabrag-coderwall-badges {
     font-size: 14px;
@@ -161,7 +161,7 @@ span.indicator-active {
 }
 
 .ui-metabrag-github-repobox .ui-metabrag-repolist > li {
-    margin: 0px; 
+    margin: 0px;
     background: -webkit-gradient(linear, left top, left bottom, from(#B6B6C3), to(#9B9BAC));
     background: -moz-linear-gradient(top,  #B6B6C3,  #9B9BAC);
     display: block;
