@@ -174,13 +174,13 @@
             },
 
             _insertList: function (element, data, fields) {
-                for(o in fields) {
+                for(field in fields) {
                     // Drop showing empty string properties.
-                    if(typeof data[o] == "string" && data[o] == "" || data[o] == null) {
+                    if(typeof data[field] == "string" && data[field] == "" || data[field] == null) {
                         continue;
                     }
-                    $("<li />").append("<span>"+fields[o]+":</span> ")
-                    .append(data[o])
+                    $("<li />").append("<span>"+fields[field]+":</span> ")
+                    .append(data[field])
                     .appendTo(element);
                 }
                 return element;
