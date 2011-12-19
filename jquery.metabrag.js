@@ -134,8 +134,8 @@
                 .appendTo($child);
 
                 $("<img />")
-                .attr("src", jsonObj.data.avatar_url)
-                .attr("alt", jsonObj.data.name)
+                .attr({"src": jsonObj.data.avatar_url,
+                    "alt": jsonObj.data.name})
                 .appendTo($avatarBox);
 
                 // Add short info
@@ -213,8 +213,8 @@
                     $listElement = $("<li />");
 
                     $("<a />")
-                    .attr("href", this.html_url)
-                    .attr("title", this.name)
+                    .attr({"href": this.html_url,
+                        "title": this.name})
                     .text(this.name)
                     .wrap("<h3>")
                     .parent()
@@ -262,9 +262,10 @@
 
             _insertBadge: function (element, data) {
                 var $imgElm = $("<img />")
-                .attr("src", data.badge)
-                .attr("alt", data.name)
-                .attr("title", data.name + ": " + data.description);
+                .attr({"src": data.badge,
+                    "alt": data.name,
+                    "title": data.name + ": " + data.description
+                });
 
                 $("<li />").append($imgElm).appendTo(element);
             },
