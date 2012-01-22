@@ -2,7 +2,7 @@
 * jQuery Mobile Framework : scrollview plugin
 * Copyright (c) 2010 Adobe Systems Incorporated - Kin Blas (jblas@adobe.com)
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
-* Note: Code is in draft form and is subject to change 
+* Note: Code is in draft form and is subject to change
 */
 (function($,window,document,undefined){
 
@@ -10,25 +10,25 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
     options: {
         fps:               60,    // Frames per second in msecs.
         direction:         null,  // "x", "y", or null for both.
-    
+
         scrollDuration:    2000,  // Duration of the scrolling animation in msecs.
         overshootDuration: 250,   // Duration of the overshoot animation in msecs.
         snapbackDuration:  500,   // Duration of the snapback animation in msecs.
-    
+
         moveThreshold:     10,   // User must move this many pixels in any direction to trigger a scroll.
         moveIntervalThreshold:     150,   // Time between mousemoves must not exceed this threshold.
-    
+
         scrollMethod:      "translate",  // "translate", "position", "scroll"
-    
+
         startEventName:    "scrollstart",
         updateEventName:   "scrollupdate",
         stopEventName:     "scrollstop",
         updatePageEventName: "scrollpage",
-    
+
         eventType:         $.support.touch ? "touch" : "mouse",
-    
+
         showScrollBars:    true,
-        
+
         pagingEnabled:     false,
         delayedClickSelector: "a,input,textarea,select,button,.ui-btn",
         delayedClickEnabled: false
@@ -41,7 +41,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
     },
 
     _create: function()
-    { 
+    {
         this._$clip = $(this.element).addClass("ui-scrollview-clip");
         var $child = this._$clip.children();
         if ($child.length > 1) {
@@ -68,17 +68,17 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
         this._sx = 0;
         this._sy = 0;
-    
+
         var direction = this.options.direction;
         this._hTracker = (direction !== "y")   ? new MomentumTracker(this.options) : null;
         this._vTracker = (direction !== "x") ? new MomentumTracker(this.options) : null;
-    
+
         this._timerInterval = 1000/this.options.fps;
         this._timerID = 0;
-    
+
         var self = this;
         this._timerCB = function(){ self._handleMomentumScroll(); };
-    
+
         this._addBehaviors();
     },
 
@@ -132,7 +132,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
             this._hTracker.reset();
 
         this._hideScrollBars();
-        
+
     },
 
     _handleMomentumScroll: function()
@@ -162,8 +162,8 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
         this._$clip.trigger(this.options.updateEventName, [ { x: x, y: y } ]);
 
         if (keepGoing)
-            this._timerID = setTimeout(this._timerCB, this._timerInterval); 
-        else 
+            this._timerID = setTimeout(this._timerCB, this._timerInterval);
+        else
             this._stopMScroll();
     },
 
@@ -189,7 +189,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
                 var c = this._$clip[0];
                 c.scrollLeft = -x;
                 c.scrollTop = -y;
-                
+
                 break;
         }
 
@@ -213,7 +213,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
             else
                 $sbt.css("left", -x/$v.width()*100 + "%");
         }
-        
+
     },
 
     scrollTo: function(x, y, duration)
@@ -325,7 +325,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 
         this._pageDelta = 0;
         this._pageSize = 0;
-        this._pagePos = 0; 
+        this._pagePos = 0;
 
         if (this.options.pagingEnabled && (svdir === "x" || svdir === "y"))
         {
@@ -482,8 +482,8 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
         this._lastY = ey;
 
         this._setScrollPosition(newX, newY);
-        
-                
+
+
 
         this._showScrollBars();
 
@@ -491,7 +491,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
         // scrolling the main window.
 
         // e.preventDefault();
-        
+
         return false;
     },
 
@@ -530,7 +530,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
                 .trigger("mouseup")
                 .trigger("click");
         }
-        
+
 
         // If a view scrolled, then we need to absorb
         // the event so that links etc, underneath our
@@ -686,15 +686,15 @@ $.extend(MomentumTracker.prototype, {
         if (state == tstates.scrolling || state == tstates.overshot)
         {
             var dx = this.speed * (1 - $.easing[this.easing](elapsed/duration, elapsed, 0, 1, duration));
-    
+
             var x = this.pos + dx;
-    
+
             var didOverShoot = (state == tstates.scrolling) && (x < this.minPos || x > this.maxPos);
             if (didOverShoot)
                 x = (x < this.minPos) ? this.minPos : this.maxPos;
-        
+
             this.pos = x;
-    
+
             if (state == tstates.overshot)
             {
                 if (elapsed >= duration)
@@ -725,7 +725,7 @@ $.extend(MomentumTracker.prototype, {
             if (elapsed >= duration)
             {
                 this.pos = this.toPos;
-                this.state = tstates.done;      
+                this.state = tstates.done;
             }
             else
                 this.pos = this.fromPos + ((this.toPos - this.fromPos) * $.easing[this.easing](elapsed/duration, elapsed, 0, 1, duration));
@@ -745,13 +745,13 @@ jQuery.widget( "mobile.scrolllistview", jQuery.mobile.scrollview, {
 
     _create: function() {
         $.mobile.scrollview.prototype._create.call(this);
-    
+
         // Cache the dividers so we don't have to search for them everytime the
         // view is scrolled.
         //
         // XXX: Note that we need to update this cache if we ever support lists
         //      that can dynamically update their content.
-    
+
         this._$dividers = this._$view.find(":jqmData(role='list-divider')");
         this._lastDivider = null;
     },
@@ -759,7 +759,7 @@ jQuery.widget( "mobile.scrolllistview", jQuery.mobile.scrollview, {
     _setScrollPosition: function(x, y)
     {
         // Let the view scroll like it normally does.
-    
+
         $.mobile.scrollview.prototype._setScrollPosition.call(this, x, y);
 
         y = -y;
@@ -784,8 +784,8 @@ jQuery.widget( "mobile.scrolllistview", jQuery.mobile.scrollview, {
             else if (d)
                 break;
         }
-        
-                        
+
+
 
         // If we found a divider to move position it at the top of the
         // clip view.

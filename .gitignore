@@ -1,2 +1,4 @@
 . DS_Store
 iphone-demo/.DS_Store
+*.swo
+*.swp
